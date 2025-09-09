@@ -1,5 +1,9 @@
 export { Gameboard };
 
 class Gameboard {
-  constructor() {}
+  constructor() {
+    this.board = Array.from({ length: 10 }, () =>
+      Array.from({ length: 10 }, () => null)
+    );
+  }
 }
