@@ -1,6 +1,8 @@
 import { Gameboard } from "../components/gameboard";
+import { Ship } from "../components/ship";
 
 const board = new Gameboard();
+const submarine = new Ship(2);
 
 test("check if the created board object is of gameboard class", () => {
   expect(board).toBeInstanceOf(Gameboard);
@@ -11,4 +13,10 @@ const boardSize =
 
 test("check if the created board class is an array of 10x10", () => {
   expect(boardSize).toBeTruthy();
+});
+
+test("check if the ship can be placed vertically in the gameboard", () => {
+  board.placeShip(submarine, 0, 0, 0);
+  expect(board.board[0][0].shipObject).toBe(submarine);
+  expect(board.board[1][0].shipObject).toBe(submarine);
 });
