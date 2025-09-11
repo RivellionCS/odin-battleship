@@ -20,3 +20,9 @@ test("check if the ship can be placed vertically in the gameboard", () => {
   expect(board.board[0][0].shipObject).toBe(submarine);
   expect(board.board[1][0].shipObject).toBe(submarine);
 });
+
+test("check if you can't place a ship at a spot where it's length is longer than the available space", () => {
+  expect(board.placeShip(submarine, 0, 9, 0)).toThrow(
+    "Ship length is longer than available space, please choose another position"
+  );
+});
