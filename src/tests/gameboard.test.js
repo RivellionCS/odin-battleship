@@ -32,3 +32,9 @@ test("check if you can't place a ship at a spot where it's length is longer than
     "Ship length is longer than available space, please choose another position"
   );
 });
+
+test("chech if you can't place a ship at a spot where it's length is longer than the available space horizontally", () => {
+  expect(board.placeShip(submarine, 0, 0, 9)).toThrow(
+    "Ship length is longer than available horizontal space, please choose another location"
+  );
+});
