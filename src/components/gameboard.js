@@ -14,7 +14,7 @@ class Gameboard {
           "Ship length is longer than available vertical space, please choose another position"
         );
       }
-      for (let i = rowPosition; i < ship.length; i++) {
+      for (let i = rowPosition; i < ship.length + rowPosition; i++) {
         this.board[i][columnPosition].shipObject = ship;
       }
     } else {
@@ -23,7 +23,7 @@ class Gameboard {
           "Ship length is longer than available horizontal space, please choose another location"
         );
       }
-      for (let i = columnPosition; i < ship.length; i++) {
+      for (let i = columnPosition; i < ship.length + columnPosition; i++) {
         this.board[rowPosition][i].shipObject = ship;
       }
     }
