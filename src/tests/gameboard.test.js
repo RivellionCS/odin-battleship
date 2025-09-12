@@ -1,7 +1,12 @@
 import { Gameboard } from "../components/gameboard";
 import { Ship } from "../components/ship";
 
-const board = new Gameboard();
+let board;
+
+beforeEach(() => {
+  board = new Gameboard();
+});
+
 const submarine = new Ship(2);
 
 test("check if the created board object is of gameboard class", () => {
