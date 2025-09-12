@@ -28,13 +28,13 @@ test("check if the ship can be placed horizontally in the gameboard", () => {
 });
 
 test("check if you can't place a ship at a spot where it's length is longer than the available space vertically", () => {
-  expect(board.placeShip(submarine, 0, 9, 0)).toThrow(
+  expect(() => board.placeShip(submarine, 0, 9, 0)).toThrow(
     "Ship length is longer than available vertical space, please choose another position"
   );
 });
 
 test("chech if you can't place a ship at a spot where it's length is longer than the available space horizontally", () => {
-  expect(board.placeShip(submarine, 0, 0, 9)).toThrow(
+  expect(() => board.placeShip(submarine, 1, 0, 9)).toThrow(
     "Ship length is longer than available horizontal space, please choose another location"
   );
 });
