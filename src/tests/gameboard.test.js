@@ -46,5 +46,10 @@ test("check if you can't place a ship at a spot where it's length is longer than
 
 test("check if recieveAttack function works when hitting a ship", () => {
   board.placeShip(submarine, 0, 0, 0);
-  expect(board.expectAttack(0, 0)).toBe("You have hit a ship");
+  expect(board.recieveAttack(0, 0)).toBe("You have hit a ship");
+});
+
+test("check if recieveAttack function works when hitting nothing", () => {
+  board.placeShip(submarine, 0, 0, 0);
+  expect(board.recieveAttack(2, 2)).toBe("You have hit nothing");
 });
