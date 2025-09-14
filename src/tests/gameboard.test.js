@@ -53,3 +53,9 @@ test("check if recieveAttack function works when hitting nothing", () => {
   board.placeShip(submarine, 0, 0, 0);
   expect(board.recieveAttack(2, 2)).toBe("You have hit nothing");
 });
+
+test("check if recieveAttack function works when hitting an already hit spot", () => {
+  board.placeShip(submarine, 0, 0, 0);
+  board.recieveAttack(2, 2);
+  expect(board.recieveAttack(2, 2)).toBe("You have already hit that spot");
+});
