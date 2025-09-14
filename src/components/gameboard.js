@@ -1,3 +1,5 @@
+import { Ship } from "./ship";
+
 export { Gameboard };
 
 class Gameboard {
@@ -26,6 +28,22 @@ class Gameboard {
       for (let i = columnPosition; i < ship.length + columnPosition; i++) {
         this.board[rowPosition][i].shipObject = ship;
       }
+    }
+  }
+
+  recieveAttack(rowPosition, columnPosition) {
+    if (
+      this.board[rowPosition][columnPosition].shipObject === null &&
+      this.board[rowPosition][columnPosition].isHit === false
+    ) {
+      return "You have hit nothing";
+    } else if (
+      this.board[rowPosition][columnPosition].shipObject instanceof Ship &&
+      this.board[rowPosition][columnPosition].isHit === false
+    ) {
+      return "You have hit a ship";
+    } else if (this.board[rowPosition][columnPosition].isHit === true) {
+      return "You have already hit that spot";
     }
   }
 }
