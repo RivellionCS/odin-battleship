@@ -59,3 +59,9 @@ test("check if recieveAttack function works when hitting an already hit spot", (
   board.recieveAttack(2, 2);
   expect(board.recieveAttack(2, 2)).toBe("You have already hit that spot");
 });
+
+test("check if missed attacks are recorded properly", () => {
+  board.placeShip(submarine, 0, 0, 0);
+  board.recieveAttack(2, 2);
+  expect(board.missedAttacks[0]).toEqual([2, 2]);
+});
