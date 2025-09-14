@@ -65,3 +65,10 @@ test("check if missed attacks are recorded properly", () => {
   board.recieveAttack(2, 2);
   expect(board.missedAttacks[0]).toEqual([2, 2]);
 });
+
+test("check if allShipsSunk method works when all ships are sunk", () => {
+  board.placeShip(submarine, 0, 0, 0);
+  board.recieveAttack(0, 0);
+  board.recieveAttack(0, 1);
+  expect(board.allShipsSunk()).toBe("All ships have been sunk");
+});
