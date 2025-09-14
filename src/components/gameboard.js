@@ -37,12 +37,14 @@ class Gameboard {
       this.board[rowPosition][columnPosition].shipObject === null &&
       this.board[rowPosition][columnPosition].isHit === false
     ) {
+      this.board[rowPosition][columnPosition].isHit = true;
       this.missedAttacks.push([rowPosition, columnPosition]);
       return "You have hit nothing";
     } else if (
       this.board[rowPosition][columnPosition].shipObject instanceof Ship &&
       this.board[rowPosition][columnPosition].isHit === false
     ) {
+      this.board[rowPosition][columnPosition].isHit = true;
       this.board[rowPosition][columnPosition].shipObject.hit();
       return "You have hit a ship";
     } else if (this.board[rowPosition][columnPosition].isHit === true) {
