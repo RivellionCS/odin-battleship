@@ -1,4 +1,5 @@
 import { Player } from "../components/player";
+import { Gameboard } from "../components/gameboard";
 
 test("Expect a new player to be of Player class", () => {
   const testPlayer = new Player("John");
@@ -15,4 +16,9 @@ test("Expect a human player to be human and a computer player to be computer", (
   const testComputer = new Player("AM", "computer");
   expect(testHuman.type).toBe("human");
   expect(testComputer.type).toBe("computer");
+});
+
+test("Expect a player to have their own gameboard", () => {
+  const testPlayer = new Player("Luigi", "human");
+  expect(testPlayer.gameboard).toBeInstanceOf(Gameboard);
 });
