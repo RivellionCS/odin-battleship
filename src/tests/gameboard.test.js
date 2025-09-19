@@ -44,6 +44,17 @@ test("check if you can't place a ship at a spot where it's length is longer than
   );
 });
 
+test("check if you can't place a ship if it's length is in the position of an already placed ship horizontally and vertically", () => {
+  board.placeShip(submarine, 0, 0, 0);
+  expect(() => board.placeShip(submarine, 0, 1, 0)).toThrow(
+    "Another ship already exists from spot 1, 0 to 2, 0"
+  );
+  board.placeShip(submarine, 1, 2, 2);
+  expect(() => board.placeShip(submarine, 1, 2, 3)).toThrow(
+    "Another ship already exists from spot 2, 3 to 2, 4"
+  );
+});
+
 test("check if recieveAttack function works when hitting a ship", () => {
   board.placeShip(submarine, 0, 0, 0);
   expect(board.recieveAttack(0, 0)).toBe("You have hit a ship");
