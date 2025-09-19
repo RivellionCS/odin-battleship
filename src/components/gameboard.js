@@ -18,6 +18,13 @@ class Gameboard {
           "Ship length is longer than available vertical space, please choose another position"
         );
       }
+      for (let i = rowPosition; i < ship.length + rowPosition; i++) {
+        if (this.board[i][columnPosition].shipObject !== null) {
+          throw new Error(
+            `Another ship already exists from spot ${rowPosition}, ${columnPosition} to ${rowPosition + ship.length - 1}, ${columnPosition}`
+          );
+        }
+      }
       this.shipsOnBoard.push(ship);
       for (let i = rowPosition; i < ship.length + rowPosition; i++) {
         this.board[i][columnPosition].shipObject = ship;
@@ -27,6 +34,13 @@ class Gameboard {
         throw new Error(
           "Ship length is longer than available horizontal space, please choose another location"
         );
+      }
+      for (let i = columnPosition; i < ship.length + columnPosition; i++) {
+        if (this.board[rowPosition][i].shipObject !== null) {
+          throw new Error(
+            `Another ship already exists from spot ${rowPosition}, ${columnPosition} to ${rowPosition}, ${columnPosition + ship.length - 1}`
+          );
+        }
       }
       this.shipsOnBoard.push(ship);
       for (let i = columnPosition; i < ship.length + columnPosition; i++) {
