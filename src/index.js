@@ -1,6 +1,17 @@
+import { Player } from "./components/player";
+import { Ship } from "./components/ship";
 import "./styles/main.css";
 
 console.log("hello world");
+
+const playerDestroyer = new Ship(5);
+const computerDestroyer = new Ship(5);
+
+const player1 = new Player("Ted", "human");
+const player2 = new Player("AM", "computer");
+
+player1.gameboard.placeShip(playerDestroyer, 0, 0, 0);
+player2.gameboard.placeShip(computerDestroyer, 0, 0, 0);
 
 function renderGameboards() {
   const playerBoard = document.getElementById("board1");
@@ -18,4 +29,18 @@ function renderGameboards() {
   }
 }
 
+function renderPlayerShips() {
+  const playerPositions = document.querySelectorAll("[data-player-position]");
+  playerPositions.forEach((button) => {
+    let rowPosition = parseInt(button.dataset.playerPosition[0]);
+    let columnPosition = parseInt(button.dataset.playerPosition[1]);
+    if (
+      player1.gameboard.board[rowPosition][columnPosition].shipObject !== null
+    ) {
+      button.classList.add("ship");
+    }
+  });
+}
+
 renderGameboards();
+renderPlayerShips();

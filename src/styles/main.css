@@ -61,3 +61,7 @@ main {
   width: 500px;
   height: 500px;
 }
+
+.ship {
+  background-color: red;
+}
