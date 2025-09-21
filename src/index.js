@@ -47,6 +47,12 @@ function disableBoard(board) {
   currentBoard.style.pointerEvents = "none";
 }
 
+function switchTurnTitle(playerObject) {
+  const title = document.getElementById("turn-title");
+  title.textContent = `It is now ${playerObject.name}'s Turn`;
+}
+
 renderGameboards();
 renderPlayerShips();
 disableBoard("board1");
+switchTurnTitle(player1);
