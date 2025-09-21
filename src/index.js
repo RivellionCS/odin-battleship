@@ -42,5 +42,11 @@ function renderPlayerShips() {
   });
 }
 
+function disableBoard(board) {
+  const currentBoard = document.getElementById(board);
+  currentBoard.style.pointerEvents = "none";
+}
+
 renderGameboards();
 renderPlayerShips();
+disableBoard("board1");
