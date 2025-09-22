@@ -42,9 +42,67 @@ function renderPlayerShips() {
   });
 }
 
-function disableBoard(board) {
+function changeBoardStatus(board, status) {
   const currentBoard = document.getElementById(board);
-  currentBoard.style.pointerEvents = "none";
+  if (status === "disable") {
+    currentBoard.style.pointerEvents = "none";
+  } else if (status === "enable") {
+    currentBoard.style.pointerEvents = "auto";
+  }
+}
+
+function attackFunctionalityComputer() {
+  const computerSpots = document.querySelectorAll("[data-computer-position]");
+  computerSpots.forEach((button) => {
+    let rowPosition = parseInt(button.dataset.computerPosition[0]);
+    let columnPosition = parseInt(button.dataset.computerPosition[1]);
+    button.addEventListener("click", () => {
+      if (
+        player2.gameboard.board[rowPosition][columnPosition].shipObject !==
+          null &&
+        player2.gameboard.board[rowPosition][columnPosition].isHit === false
+      ) {
+        player2.gameboard.recieveAttack(rowPosition, columnPosition);
+        button.classList.add("hit");
+      } else if (
+        player2.gameboard.board[rowPosition][columnPosition].shipObject ===
+          null &&
+        player2.gameboard.board[rowPosition][columnPosition].isHit === false
+      ) {
+        player2.gameboard.recieveAttack(rowPosition, columnPosition);
+        button.textContent = "X";
+      }
+      button.disabled = true;
+    });
+  });
+}
+
+function computerTurn() {
+  let rowGuess = Math.floor(Math.random() * 10);
+  let columnGuess = Math.floor(Math.random() * 10);
+  while (player1.gameboard.board[rowGuess][columnGuess].isHit === true) {
+    rowGuess = Math.floor(Math.random() * 10);
+    columnGuess = Math.floor(Math.random() * 10);
+  }
+  rowGuess = 0;
+  columnGuess = 0;
+  const hitSpot = document.querySelector(
+    `[data-player-position="${rowGuess}${columnGuess}"]`
+  );
+  if (
+    player1.gameboard.board[rowGuess][columnGuess] !== null &&
+    player1.gameboard.board[rowGuess][columnGuess].isHit === false
+  ) {
+    player1.gameboard.recieveAttack(rowGuess, columnGuess);
+    hitSpot.classList.remove = "ship";
+    hitSpot.classList.add = "hit";
+  } else if (
+    player1.gameboard.board[rowGuess][columnGuess].shipObject === null &&
+    player1.gameboard.board[rowGuess][columnGuess].isHit === false
+  ) {
+    player1.gameboard.recieveAttack(rowGuess, columnGuess);
+    hitSpot.textContent = "X";
+  }
 }
 
 function switchTurnTitle(playerObject) {
@@ -54,5 +112,7 @@ function switchTurnTitle(playerObject) {
 
 renderGameboards();
 renderPlayerShips();
-disableBoard("board1");
+changeBoardStatus("board1", "disable");
 switchTurnTitle(player1);
+attackFunctionalityComputer();
+computerTurn();
