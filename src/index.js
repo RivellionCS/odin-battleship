@@ -51,7 +51,7 @@ function changeBoardStatus(board, status) {
   }
 }
 
-function attackFunctionalityComputer() {
+function attackFunctionalityPlayer() {
   const computerSpots = document.querySelectorAll("[data-computer-position]");
   computerSpots.forEach((button) => {
     let rowPosition = parseInt(button.dataset.computerPosition[0]);
@@ -73,24 +73,27 @@ function attackFunctionalityComputer() {
         button.textContent = "X";
       }
       button.disabled = true;
+      if (!checkWin(player1, player2)) {
+        computerTurn();
+      }
     });
   });
 }
 
 function computerTurn() {
+  changeBoardStatus("board2", "disable");
+  switchTurnTitle(player2);
   let rowGuess = Math.floor(Math.random() * 10);
   let columnGuess = Math.floor(Math.random() * 10);
   while (player1.gameboard.board[rowGuess][columnGuess].isHit === true) {
     rowGuess = Math.floor(Math.random() * 10);
     columnGuess = Math.floor(Math.random() * 10);
   }
-  rowGuess = 0;
-  columnGuess = 0;
   const hitSpot = document.querySelector(
     `[data-player-position="${rowGuess}${columnGuess}"]`
   );
   if (
-    player1.gameboard.board[rowGuess][columnGuess] !== null &&
+    player1.gameboard.board[rowGuess][columnGuess].shipObject !== null &&
     player1.gameboard.board[rowGuess][columnGuess].isHit === false
   ) {
     player1.gameboard.recieveAttack(rowGuess, columnGuess);
@@ -102,6 +105,14 @@ function computerTurn() {
     player1.gameboard.recieveAttack(rowGuess, columnGuess);
     hitSpot.textContent = "X";
   }
+  if (!checkWin(player2, player1)) {
+    playerTurn();
+  }
+}
+
+function playerTurn() {
+  changeBoardStatus("board2", "enable");
+  switchTurnTitle(player1);
 }
 
 function switchTurnTitle(playerObject) {
@@ -109,9 +120,17 @@ function switchTurnTitle(playerObject) {
   title.textContent = `It is now ${playerObject.name}'s Turn`;
 }
 
+function checkWin(winner, looser) {
+  if (looser.gameboard.allShipsSunk()) {
+    console.log(`${winner.name} has won!`);
+    changeBoardStatus("board2", "disable");
+    return true;
+  }
+  return false;
+}
+
 renderGameboards();
 renderPlayerShips();
 changeBoardStatus("board1", "disable");
-switchTurnTitle(player1);
-attackFunctionalityComputer();
-computerTurn();
+
+attackFunctionalityPlayer();
