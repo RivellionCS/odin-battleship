@@ -94,8 +94,7 @@ function computerTurn() {
     player1.gameboard.board[rowGuess][columnGuess].isHit === false
   ) {
     player1.gameboard.recieveAttack(rowGuess, columnGuess);
-    hitSpot.classList.remove = "ship";
-    hitSpot.classList.add = "hit";
+    hitSpot.classList.add("hit");
   } else if (
     player1.gameboard.board[rowGuess][columnGuess].shipObject === null &&
     player1.gameboard.board[rowGuess][columnGuess].isHit === false
