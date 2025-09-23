@@ -122,11 +122,38 @@ function switchTurnTitle(playerObject) {
 
 function checkWin(winner, looser) {
   if (looser.gameboard.allShipsSunk()) {
-    console.log(`${winner.name} has won!`);
     changeBoardStatus("board2", "disable");
+    const victoryModal = document.getElementById("victory-modal");
+    const victoryTitle = document.getElementById("victory-title");
+    victoryTitle.textContent = `${winner.name} has won the game!`;
+    resetGame();
+    victoryModal.showModal();
     return true;
   }
   return false;
+}
+
+function resetGame() {
+  const resetButton = document.getElementById("reset-button");
+  resetButton.addEventListener("click", () => {
+    location.reload();
+  });
+}
+
+function namePlayer() {
+  const nameModal = document.getElementById("name-modal");
+  const nameForm = document.getElementById("name-form");
+  nameModal.showModal();
+  nameForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const playerName = document.getElementById("player-name");
+    const humanPlayer = new Player(playerName.textContent);
+    placePlayerShips(humanPlayer);
+  });
+}
+
+function placePlayerShips(player) {
+  console.log(player.name);
 }
 
 renderGameboards();
@@ -134,3 +161,4 @@ renderPlayerShips();
 changeBoardStatus("board1", "disable");
 
 attackFunctionalityPlayer();
+namePlayer();
