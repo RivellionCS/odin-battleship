@@ -148,12 +148,78 @@ function namePlayer() {
     event.preventDefault();
     const playerName = document.getElementById("player-name");
     const humanPlayer = new Player(playerName.textContent);
+    nameModal.close();
     placePlayerShips(humanPlayer);
   });
 }
 
 function placePlayerShips(player) {
-  console.log(player.name);
+  let shipCounter = 0;
+  const shipArray = [
+    new Ship(2),
+    new Ship(3),
+    new Ship(3),
+    new Ship(4),
+    new Ship(5),
+  ];
+  const submitButton = document.querySelector("button[type=`submit`]");
+  submitButton.disabled = true;
+  const placementModal = document.getElementById("placement-modal");
+  const placementForm = document.getElementById("placement-form");
+  const placeShipButton = document.getElementById("place-button");
+  placeShipButton.addEventListener("click", () => {
+    const orientation = document.querySelector(
+      "input[name='orientation']:checked"
+    );
+    const rowPosition = document.getElementById("row-position").value;
+    const columnPosition = document.getElementById("column-position").value;
+    try {
+      player.gameboard.placeShip(
+        shipArray.pop(),
+        orientation,
+        rowPosition,
+        columnPosition
+      );
+      shipCounter++;
+      if (shipCounter === 5) {
+        submitButton.disabled = false;
+      }
+    } catch (error) {
+      alert(`There has been an error: ${error}`);
+    }
+    placementForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+    });
+  });
+  placementModal.showModal();
+}
+
+function createComputerAndPlaceShips() {
+  const computer = new Player("Computer");
+  const shipsArray = [
+    new Ship(2),
+    new Ship(3),
+    new Ship(3),
+    new Ship(4),
+    new Ship(5),
+  ];
+  let rowGuess = Math.floor(Math.random() * 10);
+  let columnGuess = Math.floor(Math.random() * 10);
+  let orientation = Math.floor(Math.random * 2);
+  while (
+    computer.gameboard[rowGuess][columnGuess].shipObject !== null &&
+    shipsArray.length === 0
+  ) {
+    rowGuess = Math.floor(Math.random() * 10);
+    columnGuess = Math.floor(Math.random() * 10);
+    orientation = Math.floor(Math.random() * 2);
+    computer.gameboard.placeShip(
+      shipsArray.pop(),
+      orientation,
+      rowGuess,
+      columnGuess
+    );
+  }
 }
 
 renderGameboards();

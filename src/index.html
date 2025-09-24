@@ -35,8 +35,23 @@
         <dialog id="name-modal">
             <h2>Enter Your Name</h2>
             <form id="name-form">
+                <label for="player-name">Name:</label>
                 <input type="text" name="player-name" id="player-name" required />
                 <button type="submit">Confirm Name</button>
+            </form>
+        </dialog>
+        <dialog id="placement-modal">
+            <h2>Place Your Destroyer Ship (Length 5)</h2>
+            <form id="placement-form">
+                <p>Ship Orientation</p>
+                <label for="orientation"><input type="radio" name="orientation" value="0">Vertical</label>
+                <label for="orientation"><input type="radio" name="orientation" value="1">Horizontal</label>
+                <label for="row-position">Choose Row Position(0-9)</label>
+                <input type="number" name="row-position" id="row-position" min="0" max="9" />
+                <label for="column-position">Choose Column Position (0-9)</label>
+                <input type="number" name="column-position" id="column-position" min="0" max="9" />
+                <button id="place-button">Place Ship</button>
+                <button type="submit">Finish</button>
             </form>
         </dialog>
     </main>
