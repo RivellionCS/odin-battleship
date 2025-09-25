@@ -1,18 +1,67 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --nord0: #2e3440;
+  --nord1: #3b4252;
+  --nord2: #434c5e;
+  --nord3: #4c566a;
+  --nord4: #d8dee9;
+  --nord5: #e5e9f0;
+  --nord6: #eceff4;
+  --nord7: #8fbcbb;
+  --nord8: #88c0d0;
+  --nord9: #81a1c1;
+  --nord10: #5e81ac;
+}
+
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
+  color: var(--nord4);
+  font-family: "Roboto", sans-serif;
+}
+
+dialog {
+  background-color: var(--nord3);
+  border: 5px solid var(--nord0);
+  color: var(--nord6);
+  z-index: 1;
+}
+
+#name-content {
+  display: flex;
+  flex-direction: column;
+}
+
+#placement-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#placement-content > form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#victory-content {
+  display: flex;
+  flex-direction: column;
 }
 
 body {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-body > * {
-  border: 2px solid red;
+  align-items: stretch;
 }
 
 header,
@@ -21,6 +70,12 @@ footer {
   display: flex;
   gap: 10px;
   align-items: center;
+  justify-content: center;
+  background-color: var(--nord0);
+}
+
+header {
+  color: var(--nord4);
 }
 
 main {
@@ -28,16 +83,33 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--nord1);
+  color: var(--nord5);
+}
+
+a:link {
+  color: var(--nord8);
+}
+
+a:active {
+  color: var(--nord10);
+}
+
+a:visited {
+  color: var(--nord9);
+}
+
+#board1 > button,
+#board2 > button {
+  border: 1px solid var(--nord0);
+  color: var(--nord0);
+  background-color: var(--nord4);
 }
 
 #gameboards {
   flex: 9 1 0;
   display: flex;
   gap: 30px;
-}
-
-#gameboards > * {
-  border: 2px solid green;
 }
 
 #turn-title {
@@ -62,10 +134,12 @@ main {
   height: 500px;
 }
 
-.ship {
-  background-color: blue;
+#board1 > button.ship,
+#board2 > button.ship {
+  background-color: var(--nord7);
 }
 
-.hit {
-  background-color: red;
+#board1 > button.hit,
+#board2 > button.hit {
+  background-color: var(--nord10);
 }

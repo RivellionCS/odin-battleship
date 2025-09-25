@@ -28,37 +28,44 @@
             </div>
         </div>
         <dialog id="victory-modal">
-            <h2 id="victory-title"></h2>
-            <h2>Click the reset button to play again</h2>
-            <button id="reset-button">Reset</button>
+            <div id="victory-content">
+                <h2 id="victory-title"></h2>
+                <h2>Click the reset button to play again</h2>
+                <button id="reset-button">Reset</button>
+            </div>
         </dialog>
         <dialog id="name-modal">
-            <h2>Enter Your Name</h2>
-            <form id="name-form">
-                <label for="player-name">Name:</label>
-                <input type="text" name="player-name" id="player-name" required />
-                <button type="submit">Confirm Name</button>
-            </form>
+            <div id="name-content">
+                <h2>Enter Your Name</h2>
+                <form id="name-form">
+                    <label for="player-name">Name:</label>
+                    <input type="text" name="player-name" id="player-name" required />
+                    <button type="submit">Confirm Name</button>
+                </form>
+            </div>
         </dialog>
         <dialog id="placement-modal">
-            <h2>Place Your Destroyer Ships</h2>
-            <form id="placement-form">
-                <p>Ship Orientation</p>
-                <label for="orientation"><input type="radio" name="orientation" value="0" required
-                        checked>Vertical</label>
-                <label for="orientation"><input type="radio" name="orientation" value="1">Horizontal</label>
-                <label for="row-position">Choose Row Position(0-9)</label>
-                <input type="number" name="row-position" id="row-position" min="0" max="9" required value="0" />
-                <label for="column-position">Choose Column Position (0-9)</label>
-                <input type="number" name="column-position" id="column-position" min="0" max="9" required value="0" />
-                <button id="place-button" type="button">Place Ship</button>
-                <button type="submit">Finish</button>
-            </form>
+            <div id="placement-content">
+                <h2>Place Your Ships</h2>
+                <form id="placement-form">
+                    <h3>Ship Orientation</h3>
+                    <label for="orientation"><input type="radio" name="orientation" value="0" required
+                            checked>Vertical</label>
+                    <label for="orientation"><input type="radio" name="orientation" value="1">Horizontal</label>
+                    <label for="row-position">Choose Row Position(0-9)</label>
+                    <input type="number" name="row-position" id="row-position" min="0" max="9" required value="0" />
+                    <label for="column-position">Choose Column Position (0-9)</label>
+                    <input type="number" name="column-position" id="column-position" min="0" max="9" required
+                        value="0" />
+                    <button id="place-button" type="button">Place Ship</button>
+                    <button type="submit">Finish</button>
+                </form>
+            </div>
         </dialog>
     </main>
     <footer>
-        <a href="https://github.com/RivellionCS">Rivellion</a>
-        <a href="https://github.com/RivellionCS/odin-battleship">Source Code</a>
+        <a href="https://github.com/RivellionCS" rel="noopener noreferrer">Rivellion</a>
+        <a href="https://github.com/RivellionCS/odin-battleship" rel="noopener noreferrer">Source Code</a>
     </footer>
 
 </body>

@@ -73,31 +73,44 @@ function attackFunctionalityPlayer(player, computer) {
 function computerTurn(player, computer) {
   changeBoardStatus("board2", "disable");
   switchTurnTitle(computer);
-  let rowGuess = Math.floor(Math.random() * 10);
-  let columnGuess = Math.floor(Math.random() * 10);
-  while (player.gameboard.board[rowGuess][columnGuess].isHit === true) {
-    rowGuess = Math.floor(Math.random() * 10);
-    columnGuess = Math.floor(Math.random() * 10);
-  }
-  const hitSpot = document.querySelector(
-    `[data-player-position="${rowGuess}${columnGuess}"]`
-  );
-  if (
-    player.gameboard.board[rowGuess][columnGuess].shipObject !== null &&
-    player.gameboard.board[rowGuess][columnGuess].isHit === false
-  ) {
-    player.gameboard.recieveAttack(rowGuess, columnGuess);
-    hitSpot.classList.add("hit");
-    checkWin(computer, player);
-    computerTurn(player, computer);
-  } else if (
-    player.gameboard.board[rowGuess][columnGuess].shipObject === null &&
-    player.gameboard.board[rowGuess][columnGuess].isHit === false
-  ) {
-    player.gameboard.recieveAttack(rowGuess, columnGuess);
-    hitSpot.textContent = "X";
-    playerTurn(player);
-  }
+
+  // Delay the computer's move for 500ms (adjust as needed)
+  setTimeout(() => {
+    let rowGuess = Math.floor(Math.random() * 10);
+    let columnGuess = Math.floor(Math.random() * 10);
+
+    while (player.gameboard.board[rowGuess][columnGuess].isHit === true) {
+      rowGuess = Math.floor(Math.random() * 10);
+      columnGuess = Math.floor(Math.random() * 10);
+    }
+
+    const hitSpot = document.querySelector(
+      `[data-player-position="${rowGuess}${columnGuess}"]`
+    );
+
+    if (
+      player.gameboard.board[rowGuess][columnGuess].shipObject !== null &&
+      player.gameboard.board[rowGuess][columnGuess].isHit === false
+    ) {
+      player.gameboard.recieveAttack(rowGuess, columnGuess);
+      hitSpot.classList.add("hit");
+
+      // Check if game is over before continuing
+      if (!checkWin(computer, player)) {
+        // Add another delay before repeating computer's turn
+        setTimeout(() => {
+          computerTurn(player, computer);
+        }, 500);
+      }
+    } else if (
+      player.gameboard.board[rowGuess][columnGuess].shipObject === null &&
+      player.gameboard.board[rowGuess][columnGuess].isHit === false
+    ) {
+      player.gameboard.recieveAttack(rowGuess, columnGuess);
+      hitSpot.textContent = "X";
+      playerTurn(player); // Give control back to the player
+    }
+  }, 500); // initial delay before first attack
 }
 
 function playerTurn(player) {
