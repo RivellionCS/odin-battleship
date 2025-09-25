@@ -12,16 +12,16 @@
         <h1>Battleship</h1>
     </header>
     <main>
-        <h2 id="turn-title">It is now player 1's turn</h2>
+        <h2 id="turn-title"></h2>
         <div id="gameboards">
             <div id="player1">
-                <h2>Player 1's Board</h2>
+                <h2 id="player-title"></h2>
                 <div id="board1">
 
                 </div>
             </div>
             <div id="player2">
-                <h2>Computer's Board</h2>
+                <h2 id="computer-title"></h2>
                 <div id="board2">
 
                 </div>
@@ -41,16 +41,17 @@
             </form>
         </dialog>
         <dialog id="placement-modal">
-            <h2>Place Your Destroyer Ship (Length 5)</h2>
+            <h2>Place Your Destroyer Ships</h2>
             <form id="placement-form">
                 <p>Ship Orientation</p>
-                <label for="orientation"><input type="radio" name="orientation" value="0">Vertical</label>
+                <label for="orientation"><input type="radio" name="orientation" value="0" required
+                        checked>Vertical</label>
                 <label for="orientation"><input type="radio" name="orientation" value="1">Horizontal</label>
                 <label for="row-position">Choose Row Position(0-9)</label>
-                <input type="number" name="row-position" id="row-position" min="0" max="9" />
+                <input type="number" name="row-position" id="row-position" min="0" max="9" required value="0" />
                 <label for="column-position">Choose Column Position (0-9)</label>
-                <input type="number" name="column-position" id="column-position" min="0" max="9" />
-                <button id="place-button">Place Ship</button>
+                <input type="number" name="column-position" id="column-position" min="0" max="9" required value="0" />
+                <button id="place-button" type="button">Place Ship</button>
                 <button type="submit">Finish</button>
             </form>
         </dialog>
