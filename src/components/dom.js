@@ -1,5 +1,5 @@
-import { Player } from "./player";
-import { Ship } from "./ship";
+import { Player } from "./components/player";
+import { Ship } from "./components/ship";
 
 export { playGame };
 
@@ -73,38 +73,31 @@ function attackFunctionalityPlayer(player, computer) {
 function computerTurn(player, computer) {
   changeBoardStatus("board2", "disable");
   switchTurnTitle(computer);
-
-  setTimeout(() => {
-    let rowGuess = Math.floor(Math.random() * 10);
-    let columnGuess = Math.floor(Math.random() * 10);
-
-    while (player.gameboard.board[rowGuess][columnGuess].isHit === true) {
-      rowGuess = Math.floor(Math.random() * 10);
-      columnGuess = Math.floor(Math.random() * 10);
-    }
-
-    const hitSpot = document.querySelector(
-      `[data-player-position="${rowGuess}${columnGuess}"]`
-    );
-
-    if (
-      player.gameboard.board[rowGuess][columnGuess].shipObject !== null &&
-      player.gameboard.board[rowGuess][columnGuess].isHit === false
-    ) {
-      player.gameboard.recieveAttack(rowGuess, columnGuess);
-      hitSpot.classList.add("hit");
-      if (!checkWin(computer, player)) {
-        setTimeout(() => computerTurn(player, computer), 500);
-      }
-    } else if (
-      player.gameboard.board[rowGuess][columnGuess].shipObject === null &&
-      player.gameboard.board[rowGuess][columnGuess].isHit === false
-    ) {
-      player.gameboard.recieveAttack(rowGuess, columnGuess);
-      hitSpot.textContent = "X";
-      playerTurn(player);
-    }
-  }, 500);
+  let rowGuess = Math.floor(Math.random() * 10);
+  let columnGuess = Math.floor(Math.random() * 10);
+  while (player.gameboard.board[rowGuess][columnGuess].isHit === true) {
+    rowGuess = Math.floor(Math.random() * 10);
+    columnGuess = Math.floor(Math.random() * 10);
+  }
+  const hitSpot = document.querySelector(
+    `[data-player-position="${rowGuess}${columnGuess}"]`
+  );
+  if (
+    player.gameboard.board[rowGuess][columnGuess].shipObject !== null &&
+    player.gameboard.board[rowGuess][columnGuess].isHit === false
+  ) {
+    player.gameboard.recieveAttack(rowGuess, columnGuess);
+    hitSpot.classList.add("hit");
+    checkWin(computer, player);
+    computerTurn(player, computer);
+  } else if (
+    player.gameboard.board[rowGuess][columnGuess].shipObject === null &&
+    player.gameboard.board[rowGuess][columnGuess].isHit === false
+  ) {
+    player.gameboard.recieveAttack(rowGuess, columnGuess);
+    hitSpot.textContent = "X";
+    playerTurn(player);
+  }
 }
 
 function playerTurn(player) {
