@@ -1,5 +1,5 @@
-import { Player } from "./components/player";
-import { Ship } from "./components/ship";
+import { Player } from ".player";
+import { Ship } from "./ship";
 
 export { playGame };
 
